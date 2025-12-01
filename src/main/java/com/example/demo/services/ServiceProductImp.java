@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-public class ServiceProductImp implements ServiceProduct{
+public class ServiceProductImp extends ServiceProduct {
     private final ProductRepository  productRepository;
     private static final int LOW_STOCK_THRESHOLD = 10;
 
@@ -15,12 +15,12 @@ public class ServiceProductImp implements ServiceProduct{
         this.productRepository = productRepository;
     }
 
-    @Override
+    //@Override
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    @Override
+    //@Override
     public Optional<Product> findById(Long id) {
         if(id == null || id <= 0){
             throw new IllegalArgumentException("id de produit est invalide");
@@ -28,17 +28,17 @@ public class ServiceProductImp implements ServiceProduct{
         return productRepository.findById(id);
     }
 
-    @Override
+    //@Override
     public List<Product> findByNameContainingIgnoreCase(String name) {
         return productRepository.findByNameContainingIgnoreCase(name);
     }
 
-    @Override
+    //@Override
     public List<Product> findLowStockProducts() {
         return productRepository.findByQuantityIsLessThanEqual(LOW_STOCK_THRESHOLD);
     }
 
-    @Override
+    //@Override
     public Product addStock(Long productId, Integer quantity) {
         if(quantity == null || quantity <= 0){
             throw new IllegalArgumentException("quantity ajouter doit etre positive");
@@ -50,7 +50,7 @@ public class ServiceProductImp implements ServiceProduct{
         return productRepository.save(product);
     }
 
-    @Override
+    //@Override
     public Product removeStock(Long productId, Integer quantity) {
         if(quantity == null || quantity <= 0){
             throw new IllegalArgumentException("quantity ajouter doit etre positive");
